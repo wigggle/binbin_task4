@@ -1,0 +1,12 @@
+li{
+    display: inline-block;
+    background-color: palevioletred;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>binbin_task4</title>
+    <link rel="stylesheet" type="text/css" href="task4.css">
+</head>
+<body>
+    <input type="text" id="number" />
+    <input type="button" id="leftin" value="左侧入">
+    <input type="button" id="rightin" value="右侧入">
+    <input type="button" id="leftout" value="左侧出">
+    <input type="button" id="rightout" value="右侧出">
+    <ul id="num_list">
+    </ul>
+
+    <script type="text/javascript">
+        var input_num = document.getElementById("number");
+        var leftin = document.getElementById("leftin");
+        var rightin = document.getElementById("rightin");
+        var leftout = document.getElementById("leftout");
+        var rightout = document.getElementById("rightout");
+        var num_list = document.getElementById("num_list");
+
+        //左侧入
+        function left_in_Click(){
+            if(input_num.value==""){
+                alert("请输入一个数字！");
+            }else if(!isNaN(input_num.value)){
+                var li = document.createElement("li");
+                li.innerHTML=input_num.value;
+                num_list.insertBefore(li,num_list.firstChild);
+                input_num.value="";
+            }else{
+                alert("格式不对，重新输入");
+            }
+        }
+        //右侧入
+        function right_in_Click(){
+            if(input_num.value==""){
+                alert("请输入一个数字！");
+            }else if(!isNaN(input_num.value)){
+                var li = document.createElement("li");
+                li.innerHTML=input_num.value;
+                num_list.appendChild(li);
+            }else{
+                alert("格式不对，重新输入");
+            }
+        }
+        //左侧出
+        function left_out_Click(){
+            num_list.removeChild(num_list.firstChild);//移除第一个节点元素
+        }
+        //右侧出
+        function right_out_Click(){
+            num_list.removeChild(num_list.lastChild);//移除最后一个节点元素
+        }
+
+        //添加监听事件
+        num_list.addEventListener("cliick",function(){
+            if(event.target.nodeName.toLowerCase()=="li"){ //js事件委托
+                num_list.removeChild(event.target);
+            }
+        });
+
+        //绑定button的click事件
+        leftin.onclick = function(){
+            left_in_Click();
+        }
+        rightin.onclick = function(){
+            right_in_Click();
+        }
+
+        leftout.onclick=function(){
+            var li_list = document.getElementsByTagName("li");
+            if (li_list.length>0){
+                var fitstnum =li_list[0].innerHTML;
+                confirm("确定删除"+fitstnum+"?");
+                left_out_Click();
+            }else{
+                alert("请输入一个数字");
+            }
+        }
+
+        rightout.onclick=function(){
+            var li_list = document.getElementsByTagName("li");
+            if (li_list.length>0){
+                var lasttnum =li_list[li_list.length-1].innerHTML;
+                confirm("确定删除"+lasttnum+"?");
+                left_out_Click();
+            }else{
+                alert("请输入一个数字");
+            }
+        }
+    </script>
+</body>
+</html>
